@@ -1,0 +1,49 @@
+{
+  "name": "pointer-cms",
+  "version": "0.1.0",
+  "description": "cursor: pointer; — What You Chat Is What You Get. The AI-powered CMS that replaces editors with conversations.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "pointer-cms": "./bin/cli.mjs"
+  },
+  "files": [
+    "bin",
+    ".output"
+  ],
+  "scripts": {
+    "dev": "nuxt dev --port 4321",
+    "build": "nuxt build",
+    "postbuild": "node scripts/prepare-bin.mjs",
+    "preview": "nuxt preview",
+    "prepare": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^3.1.0",
+    "@octokit/rest": "^21.1.1",
+    "nuxt": "^3.16.2"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^1.2.0",
+    "typescript": "^5.8.2"
+  },
+  "keywords": [
+    "cms",
+    "ai",
+    "headless-cms",
+    "chat",
+    "content-management",
+    "github",
+    "cursor",
+    "cloudflare"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mondayrunner/pointer-cms.git"
+  },
+  "homepage": "https://pointercms.com",
+  "author": "Sitelane",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

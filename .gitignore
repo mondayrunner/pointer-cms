@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Nuxt
+.nuxt/
+.output/
+.data/
+dist/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Config (may contain secrets)
+.pointercms
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
