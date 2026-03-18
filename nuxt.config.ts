@@ -20,6 +20,11 @@ export default defineNuxtConfig({
       title: 'Pointer CMS',
       meta: [
         { name: 'description', content: 'What You Chat Is What You Get — The AI-powered CMS that replaces editors with conversations.' }
+      ],
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' }
       ]
     }
   },
