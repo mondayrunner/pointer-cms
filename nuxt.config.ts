@@ -7,6 +7,8 @@ export default defineNuxtConfig({
     '@nuxt/ui'
   ],
 
+  css: ['~/assets/css/main.css'],
+
   devServer: {
     port: 4321
   },
