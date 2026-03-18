@@ -1,8 +1,80 @@
+<script setup lang="ts">
+const showMobileSidebar = ref(false)
+</script>
+
 <template>
-  <div class="flex h-screen bg-[var(--ui-bg)]">
-    <ConversationSidebar />
-    <main class="flex-1 flex flex-col min-w-0">
-      <slot />
+  <div class="relative isolate flex min-h-svh w-full bg-white max-lg:flex-col lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950">
+    <!-- Sidebar on desktop -->
+    <div class="fixed inset-y-0 left-0 w-64 max-lg:hidden">
+      <ConversationSidebar />
+    </div>
+
+    <!-- Mobile sidebar overlay -->
+    <Teleport to="body">
+      <Transition name="fade">
+        <div v-if="showMobileSidebar" class="fixed inset-0 z-50 bg-black/30 lg:hidden" @click="showMobileSidebar = false" />
+      </Transition>
+      <Transition name="slide">
+        <div v-if="showMobileSidebar" class="fixed inset-y-0 left-0 z-50 w-full max-w-80 p-2 lg:hidden">
+          <div class="flex h-full flex-col rounded-lg bg-white shadow-xs ring-1 ring-zinc-950/5 dark:bg-zinc-900 dark:ring-white/10">
+            <div class="-mb-3 px-4 pt-3">
+              <button class="flex size-10 items-center justify-center rounded-lg hover:bg-zinc-950/5 dark:hover:bg-white/5" @click="showMobileSidebar = false">
+                <svg class="size-5 fill-zinc-950 dark:fill-white" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                </svg>
+              </button>
+            </div>
+            <ConversationSidebar />
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
+
+    <!-- Mobile navbar -->
+    <header class="flex items-center px-4 lg:hidden">
+      <div class="py-2.5">
+        <button class="flex size-10 items-center justify-center rounded-lg hover:bg-zinc-950/5 dark:hover:bg-white/5" @click="showMobileSidebar = true">
+          <svg class="size-5 fill-zinc-950 dark:fill-white" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M2 6.75C2 6.33579 2.33579 6 2.75 6H17.25C17.6642 6 18 6.33579 18 6.75C18 7.16421 17.6642 7.5 17.25 7.5H2.75C2.33579 7.5 2 7.16421 2 6.75ZM2 13.25C2 12.8358 2.33579 12.5 2.75 12.5H17.25C17.6642 12.5 18 12.8358 18 13.25C18 13.6642 17.6642 14 17.25 14H2.75C2.33579 14 2 13.6642 2 13.25Z" />
+          </svg>
+        </button>
+      </div>
+      <div class="min-w-0 flex-1">
+        <StatusBar />
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-64">
+      <div class="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
+        <div class="mx-auto max-w-6xl flex flex-col h-full">
+          <div class="max-lg:hidden">
+            <StatusBar />
+          </div>
+          <slot />
+        </div>
+      </div>
     </main>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.slide-enter-active {
+  transition: transform 0.3s ease-out;
+}
+.slide-leave-active {
+  transition: transform 0.2s ease-in;
+}
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+</style>

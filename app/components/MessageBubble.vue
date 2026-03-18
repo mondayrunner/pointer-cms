@@ -15,14 +15,14 @@ defineProps<{
       class="max-w-[80%] rounded-2xl px-4 py-3"
       :class="[
         message.role === 'user'
-          ? 'bg-[var(--ui-color-primary-500)] text-white rounded-br-sm'
-          : 'bg-[var(--ui-bg-elevated)] text-[var(--ui-text)] rounded-bl-sm border border-[var(--ui-border)]'
+          ? 'bg-zinc-950 text-white rounded-br-sm dark:bg-white dark:text-zinc-950'
+          : 'bg-transparent border border-zinc-950/10 text-zinc-950 rounded-bl-sm dark:border-white/10 dark:text-white'
       ]"
     >
-      <div class="text-sm whitespace-pre-wrap">{{ message.content }}</div>
+      <div class="text-sm/6 whitespace-pre-wrap">{{ message.content }}</div>
       <div
-        class="text-xs mt-1"
-        :class="message.role === 'user' ? 'text-white/60' : 'text-[var(--ui-text-dimmed)]'"
+        class="text-xs mt-1.5"
+        :class="message.role === 'user' ? 'text-white/50 dark:text-zinc-950/50' : 'text-zinc-500 dark:text-zinc-400'"
       >
         {{ new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
       </div>
