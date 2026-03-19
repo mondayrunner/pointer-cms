@@ -46,10 +46,11 @@ You chat → AI builds → Preview → Approve → Live
 
 ### 1. GitHub OAuth App
 
-Create a GitHub OAuth App at [github.com/settings/developers](https://github.com/settings/developers):
+Create a GitHub App at [github.com/settings/apps](https://github.com/settings/apps):
 
-- **Homepage URL:** `http://localhost:4321` (or your deployed URL)
-- **Callback URL:** `http://localhost:4321/api/auth/callback`
+- **Homepage URL:** your domain (e.g. `https://yourdomain.com` or `http://localhost:4321` for local dev)
+- **Callback URL:** `<your domain>/api/auth/callback`
+- **Webhook URL:** `<your domain>/auth`
 
 Save the Client ID and Client Secret.
 

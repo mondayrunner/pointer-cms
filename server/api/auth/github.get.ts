@@ -9,7 +9,8 @@ export default defineEventHandler((event) => {
     })
   }
 
-  const redirectUri = `http://localhost:${process.env.NITRO_PORT || 4321}/api/auth/callback`
+  const requestUrl = getRequestURL(event)
+  const redirectUri = `${requestUrl.origin}/api/auth/callback`
   const scope = 'repo'
 
   const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`
