@@ -25,12 +25,12 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    githubClientId: process.env.GITHUB_CLIENT_ID || '',
-    githubClientSecret: process.env.GITHUB_CLIENT_SECRET || '',
-    cursorWebhookUrl: process.env.CURSOR_WEBHOOK_URL || '',
-    cursorWebhookKey: process.env.CURSOR_WEBHOOK_KEY || '',
+    githubClientId: '',
+    githubClientSecret: '',
+    cursorWebhookUrl: '',
+    cursorWebhookKey: '',
     public: {
-      githubClientId: process.env.GITHUB_CLIENT_ID || '',
+      githubClientId: '',
       appName: 'Pointer CMS'
     }
   },

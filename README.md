@@ -120,11 +120,17 @@ Configure your `.pointercms` file:
 }
 ```
 
-Or use environment variables:
+Or use environment variables (Nuxt uses `NUXT_` prefix to map to runtime config):
 
 ```bash
-GITHUB_CLIENT_ID=xxx GITHUB_CLIENT_SECRET=xxx npx pointer-cms
+NUXT_GITHUB_CLIENT_ID=xxx
+NUXT_GITHUB_CLIENT_SECRET=xxx
+NUXT_PUBLIC_GITHUB_CLIENT_ID=xxx
+NUXT_CURSOR_WEBHOOK_URL=xxx
+NUXT_CURSOR_WEBHOOK_KEY=xxx
 ```
+
+For Cloudflare Workers, set these as secrets via `wrangler secret put <NAME>`.
 
 ## CLI
 
