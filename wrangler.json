@@ -1,0 +1,8 @@
+{
+  "name": "pointercms",
+  "compatibility_date": "2026-03-19",
+  "assets": {
+    "directory": ".output/public"
+  },
+  "main": ".output/server/index.mjs"
+}

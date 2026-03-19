@@ -44,6 +44,63 @@ You chat → AI builds → Preview → Approve → Live
 
 ## Setup
 
+### 1. GitHub OAuth App
+
+Create a GitHub OAuth App at [github.com/settings/developers](https://github.com/settings/developers):
+
+- **Homepage URL:** `http://localhost:4321` (or your deployed URL)
+- **Callback URL:** `http://localhost:4321/api/auth/callback`
+
+Save the Client ID and Client Secret.
+
+### 2. Cursor Automation
+
+Pointer CMS uses [Cursor Automations](https://cursor.com/automations) to generate code. You need to set up an automation that receives webhook calls from Pointer CMS.
+
+1. Go to [cursor.com/automations](https://cursor.com/automations)
+2. Create a new automation for your project
+3. Click **"+ Add Trigger"** → select **Webhook**
+4. Select the **repository** this automation should work on
+5. Copy the **Auth Header** and **API URL** — you'll need these for your `.pointercms` config:
+   - API URL → `cursorWebhookUrl`
+   - Auth Header → `cursorWebhookKey`
+6. Under **Tools**, make sure the agent has **Git write** access so it can create branches and open pull requests
+7. Enable **"Use Configured Environment"** under Cloud Agent Environment
+8. Paste the following into the **Instructions** field:
+
+```
+You receive a payload from Pointer CMS with:
+- `action` — always "generate"
+- `repo` — the GitHub repository (owner/repo)
+- `issue_number` — the GitHub issue number (this is the conversation)
+- `prompt` — the user's content request in natural language
+- `branch` — the branch to work on (e.g. pointer-cms/issue-42)
+
+Your job:
+1. Read the prompt to understand the requested content change.
+2. Implement the change in this repository on the specified branch.
+3. If the request is ambiguous or blocked, stop and explain what is missing.
+
+Rules:
+- Prefer small, focused changes.
+- Respect the existing stack and conventions in this repo.
+- Do not make unrelated refactors.
+- Work on the branch specified in the payload.
+
+After coding:
+1. Verify the result as well as you reasonably can.
+2. Open a pull request:
+   - Use the prompt (or a summary of it) as PR title.
+   - Include a brief summary of changes in the PR body.
+3. Push to the branch so Cloudflare Pages can generate a preview.
+
+Important:
+- Always open a pull request — never push directly to main/master.
+- Do not claim work is done if it is not.
+```
+
+### 3. Configure Pointer CMS
+
 ```bash
 # Create config file
 npx pointer-cms init
